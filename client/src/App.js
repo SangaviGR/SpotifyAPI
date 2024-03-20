@@ -5,9 +5,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { grey } from '@mui/material/colors';
-
-const primary = grey['A400'];
 
 export default function App() {
   const [tracks, setTracks] = useState([]);
