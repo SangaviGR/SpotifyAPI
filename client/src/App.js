@@ -299,11 +299,24 @@ export default function App() {
   const [tracks, setTracks] = useState([]);
 
   const getTracks = async (searchQuery) => {
-    let dataTracks = await fetch(`https://v1.nocodeapi.com/sangavigr/spotify/QzyQKtErDKBrohBb/search?type=track&q=${searchQuery}`);
-    let convertedDataTracks = await dataTracks.json();
-    console.log(convertedDataTracks.tracks.items);
-    setTracks(convertedDataTracks.tracks.items);
+    try {
+      let dataTracks = await fetch(`https://v1.nocodeapi.com/sangavigr/spotify/QzyQKtErDKBrohBb/search?type=track&q=${searchQuery}`);
+      let convertedDataTracks = await dataTracks.json();
+      
+      // Log the convertedDataTracks object to inspect its structure
+      console.log(convertedDataTracks);
+      
+      if (convertedDataTracks.tracks && convertedDataTracks.tracks.items) {
+        // Set tracks if the expected properties are present in the response
+        setTracks(convertedDataTracks.tracks.items);
+      } else {
+        console.error("Unexpected response format: tracks or tracks.items not found.");
+      }
+    } catch (error) {
+      console.error("Error fetching tracks:", error);
+    }
   }
+  
 
   return (
     <div style={{ backgroundColor: '#5768', height: '100vh', overflowY: 'scroll' }}>
