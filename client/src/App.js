@@ -319,7 +319,7 @@ export default function App() {
   
 
   return (
-    <div style={{ backgroundColor: '#5768', height: '100vh', overflowY: 'scroll' }}>
+    <div style={{ backgroundColor: '#5768', height: '100vh', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <NavBar onSearch={getTracks} />
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' ,marginLeft:'20px'}}>
         {tracks.map((track) => (
@@ -328,28 +328,32 @@ export default function App() {
             minWidth: '200px',
             width: '100%', // Make the card take full width initially
             marginBottom: '20px', // Add some margin at the bottom for spacing
-            
+            display: 'flex',
+            flexDirection: 'column', // Align content in a column
+            justifyContent: 'space-between', // Space evenly
           }}>
-          <CardMedia
-              component="img"
-              height="auto"
-              image={track.album.images[0].url}
-              alt={track.name}
-            />
-            <CardContent style={{ flexGrow: 1 }}>
-              <Typography variant="h6" component="div">
-                {track.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                {track.artists.map((artist) => artist.name).join(', ')}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                {track.album.release_date}
-              </Typography>
-            </CardContent>
+            <div>
+              <CardMedia
+                component="img"
+                height="auto"
+                image={track.album.images[0].url}
+                alt={track.name}
+              />
+              <CardContent style={{ flexGrow: 1 }}>
+                <Typography variant="h6" component="div">
+                  {track.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {track.artists.map((artist) => artist.name).join(', ')}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {track.album.release_date}
+                </Typography>
+              </CardContent>
+            </div>
             {track.preview_url && (
-              <div style={{ width: '100%',  padding: '8px' }}>
-                <audio controls style={{ width: '278px' }}>
+              <div style={{ padding: '8px' }}>
+                <audio controls style={{ width: '100%' }}>
                   <source src={track.preview_url} type="audio/mp3" />
                   Your browser does not support the audio tag.
                 </audio>
@@ -360,4 +364,5 @@ export default function App() {
       </div>
     </div>
   )
+  
 }
