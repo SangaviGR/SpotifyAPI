@@ -1,7 +1,3 @@
-Here's a basic README for your application:
-
----
-
 # Spotify Track Search App
 
 This React application allows users to search for tracks on Spotify using the Spotify API. Users can enter a search query, and the app will display a list of tracks matching the query, including track details and a preview of the track if available.
